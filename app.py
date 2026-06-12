@@ -1,50 +1,63 @@
 import streamlit as st
 
-# セッション状態の初期化
-if 'page' not in st.session_state:
+# --- 1. ゲームの状態（パラメータ・フラグ）の初期化 ---
+def init_game():
     st.session_state.page = 'select_char'
-if 'selected_char' not in st.session_state:
-    st.session_state.selected_char = None
+    st.session_state.char = None
+    # パラメータ管理
+    st.session_state.params = {"好感度": 0, "勇気": 0, "知識": 0}
+    # フラグ管理
+    st.session_state.flags = {"アイテムA所持": False}
+    st.session_state.result = ""
 
-# 画面遷移の制御
-def set_page(page_name):
-    st.session_state.page = page_name
+if 'page' not in st.session_state:
+    init_game()
 
-# --- ページごとの処理 ---
+# --- 2. ページごとの処理 ---
 
-# 1. キャラクター選択画面
+# 画面1: キャラクター選択
 if st.session_state.page == 'select_char':
-    st.title("ノベルゲームへようこそ")
-    st.write("キャラクターを選んでください：")
-    
-    col1, col2, col3 = st.columns(3)
-    
-    if col1.button("勇者"):
-        st.session_state.selected_char = "勇者"
-        set_page('scene_1')
-    if col2.button("魔法使い"):
-        st.session_state.selected_char = "魔法使い"
-        set_page('scene_1')
-    if col3.button("盗賊"):
-        st.session_state.selected_char = "盗賊"
-        set_page('scene_1')
+    st.title("キャラクター選択")
+    char_list = ["勇者", "魔法使い", "盗賊"]
+    for char in char_list:
+        if st.button(char):
+            st.session_state.char = char
+            st.session_state.page = 'scene_1'
+            st.rerun()
 
-# 2. ストーリー分岐画面
+# 画面2: シーン1（フラグの取得とパラメータ変化）
 elif st.session_state.page == 'scene_1':
-    st.title(f"{st.session_state.selected_char}の物語")
-    st.write("目の前に分かれ道が現れた。どちらに進む？")
+    st.title(f"{st.session_state.char}の章")
+    st.write("古い神殿で何かを見つけた。")
     
-    if st.button("右の洞窟へ進む"):
-        st.session_state.result = "洞窟で宝を見つけた！"
-        set_page('ending')
-    if st.button("左の森へ進む"):
-        st.session_state.result = "森で迷子になった..."
-        set_page('ending')
+    col1, col2 = st.columns(2)
+    if col1.button("「勇気の剣」を拾う (勇気+2)"):
+        st.session_state.params["勇気"] += 2
+        st.session_state.flags["アイテムA所持"] = True
+        st.write("勇気が上がった！アイテムを手に入れた！")
+    if col2.button("書物を読む (知識+2)"):
+        st.session_state.params["知識"] += 2
+        st.write("知識が上がった！")
+    
+    if st.button("次へ"):
+        st.session_state.page = 'final_scene'
+        st.rerun()
 
-# 3. 終了画面
-elif st.session_state.page == 'ending':
-    st.title("結果")
-    st.write(f"結果: {st.session_state.result}")
+# 画面3: 最終シーン（パラメータによる分岐・マルチエンディング）
+elif st.session_state.page == 'final_scene':
+    st.title("結末の時")
+    st.write(f"現在の能力: {st.session_state.params}")
     
-    if st.button("最初からやり直す"):
-        set_page('select_char')
+    # 条件分岐によるマルチエンディング
+    if st.session_state.params["勇気"] >= 2 and st.session_state.flags["アイテムA所持"]:
+        st.success("隠しエンディング：伝説の英雄になった！")
+    elif st.session_state.params["勇気"] >= 2:
+        st.info("ハッピーエンド：勇者として称えられた。")
+    elif st.session_state.params["知識"] >= 2:
+        st.info("ノーマルエンド：賢者として生きた。")
+    else:
+        st.error("バッドエンド：何も残らなかった…")
+
+    if st.button("リセットして最初から"):
+        init_game()
+        st.rerun()
