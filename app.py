@@ -78,6 +78,17 @@ elif st.session_state.page == 'game':
 
 # 結果表示画面
 elif st.session_state.page == 'result':
+     # 現在のキャラ、現在のシーンのデータを取得
+    char_data = SCENARIO_DATA.get(st.session_state.char, {})
+    node = char_data.get(st.session_state.current_scene)
+
+    if node:
+        # 画像表示
+        if "image" in node:
+            st.image(node["image"], use_container_width=True)
+        
+        # テキスト表示
+        st.write(node["text"])
     st.subheader("結末")
     st.write(f"最終結果: {st.session_state.current_scene}")
     st.write(f"最終ステータス: {st.session_state.params}")
