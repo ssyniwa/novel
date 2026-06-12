@@ -2,7 +2,7 @@ import streamlit as st
 import json
 
 # --- 1. データの読み込み ---
-@st.cache_data
+
 def load_scenario():
     with open("scenario.json", "r", encoding="utf-8") as f:
         return json.load(f)
