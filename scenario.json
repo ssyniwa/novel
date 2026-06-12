@@ -70,7 +70,7 @@
       "options": [
         {
           "label": "指示に従い退却する",
-          "next": "retreat_success",
+          "next": "ending_normal",
           "effect": {"好感度": 2}
         },
         {
@@ -118,7 +118,7 @@
       "options": [
         {
           "label": "通常業務に戻る",
-          "next": "normal_duties",
+          "next": "ending_normal",
           "effect": {"好感度": 3}
         },
         {
@@ -141,6 +141,17 @@
           "label": "光学迷彩を発動し、建物に潜入する",
           "next": "infiltration",
           "effect": {"勇気": 3, "好感度": -2}
+        }
+      ]
+    },
+    "ending_normal": {
+      "text": "あれ以降、上層部から不審者に関する追加調査が下りることはなかった。組織は日常を取り戻し、以前と変わらぬ穏やかな任務が続く。しかし、サーシャの心には消えない違和感が残る。あの時、深入りしていれば何が見えたのか。彼女は今日も、真実を喉の奥にしまい込み、組織の一員として淡々と任務を遂行する。",
+      "image": "images/sasha_normal_ending.png",
+      "options": [
+        {
+          "label": "最初からやり直す",
+          "next": "start",
+          "effect": {}
         }
       ]
     }
