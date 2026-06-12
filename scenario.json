@@ -16,7 +16,7 @@
         }
       ]
       },
-    "battle": {
+    "maintenance_path": {
       "text": "魔物が現れた！",
       "image": "images/battle.jpg",
       "options": [
