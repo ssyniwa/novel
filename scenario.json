@@ -102,7 +102,7 @@
       "options": [
         {
           "label": "指示通り退却する",
-          "next": "retreat_success",
+          "next": "ending_normal",
           "effect": {"好感度": 1}
         },
         {
