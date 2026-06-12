@@ -1,0 +1,19 @@
+{
+  "勇者": {
+    "start": {
+      "text": "広大な草原で冒険が始まる。",
+      "image": "images/hero_start.jpg",
+      "options": [
+        {"label": "剣をとる", "next": "battle", "effect": {"勇気": 2}}
+      ]
+    },
+    "battle": {
+      "text": "魔物が現れた！",
+      "image": "images/battle.jpg",
+      "options": [
+        {"label": "戦う", "next": "ending_good"},
+        {"label": "逃げる", "next": "ending_bad"}
+      ]
+    }
+  }
+}
