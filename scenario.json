@@ -123,7 +123,7 @@
         },
         {
           "label": "独自の極秘調査を開始する",
-          "next": "secret_investigation",
+          "next": "data_analysis",
           "effect": {"知識": 2, "勇気": 1}
         }
       ]
