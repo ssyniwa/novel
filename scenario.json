@@ -16,12 +16,10 @@
         }
       ]
       },
-    "maintenance_path": {
-      "text": "魔物が現れた！",
-      "image": "images/battle.jpg",
+   "maintenance_path": {
+      "text": "狭い通路に入ると息苦しさが襲う...",
       "options": [
-        {"label": "戦う", "next": "ending_good"},
-        {"label": "逃げる", "next": "ending_bad"}
+        {"label": "気合で進む", "next": "ending_good"}
       ]
     }
   }
