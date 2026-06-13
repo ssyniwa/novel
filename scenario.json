@@ -213,8 +213,8 @@
           "effect": {"知識": 5, "勇気": 2}
         },
         {
-          "label": "上層部を呼び出し、隠蔽の事実を突きつける",
-          "next": "confront_management",
+          "label": "ベースに戻り聞き出す。",
+          "next": "return_base",
           "effect": {"勇気": 5, "知識": 2}
         }
       ]
