@@ -295,7 +295,7 @@
       "options": [
         {
           "label":"地球と全面戦争が勃発する",
-          "next": "ending_bad1"
+          "next": "ending_bad1",
           "effect": {"好感度": -10}
         }
       ]
